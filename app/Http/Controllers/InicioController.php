@@ -16,7 +16,7 @@ class InicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function inicio()
     {
         return view('modulos.inicio');
     }

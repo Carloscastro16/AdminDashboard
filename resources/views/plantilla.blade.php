@@ -37,13 +37,14 @@
     @if(Auth::user())
         <div class="wrapper">
             @include('modulos.cabecera')
-            @include('modulos.menu')
+            @if(auth()->user()->rol == "Vendedor")
+                @include('modulos.menu')
+            @else
+                @include('modulos.menu')
+            @endif
+
             @yield('contenido')
         </div>
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="https://adminlte.io">Carlos Castro</a>.</strong>
-            All rights reserved.
-        </footer>
     @else
         <div class="login-page">
             @yield('content')

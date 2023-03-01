@@ -21,10 +21,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('Inicio', [InicioController::class, 'index']);
+Route::get('inicio', [InicioController::class, 'inicio'])->name('inicio');
 
+Route::get('/perfil', [App\Http\Controllers\UsuariosController::class, 'perfil'])->name('perfil');
+Route::get('/perfil', [App\Http\Controllers\UsuariosController::class, 'perfilUpt'])->name('perfilUpt');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
