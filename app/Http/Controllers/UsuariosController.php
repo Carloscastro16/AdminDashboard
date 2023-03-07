@@ -23,7 +23,12 @@ class UsuariosController extends Controller
     {
         return view('modulos.MiPerfil');
     }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function MiPerfilUpdate(Request $request){
         //Verificar si el correo actual es diferente al correo Nuevo
         if(auth()->user()->email != request('email')){
@@ -82,7 +87,7 @@ class UsuariosController extends Controller
             'email'=> $datos["email"], 'documento'=>$documento, 'foto'=>$rutaImg]);
         }
 
-        return redirect('perfil');
+        return redirect('MiPerfil');
     }
     /**
      * Show the form for creating a new resource.

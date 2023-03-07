@@ -178,45 +178,45 @@
                     <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="settings">
-                        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
-                            @carf
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                            @csrf
                             @method('put')
                             <div class="form-group row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <label for="inputName" class="col-sm-2 col-form-label">Imagen</label>
                                 <div class="col-sm-10">
-                                <input type="file" class="form-control" id="inputName">
+                                <input type="file" class="form-control" name="fotoPerfil">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::user()->name }}">
+                                <input type="text" name="name" class="form-control" placeholder="name" value="{{ Auth::user()->name }}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::user()->email }}">
+                                <input type="email" class="form-control" placeholder="Email" name="email" value="{{ Auth::user()->email }}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputName2" class="col-sm-2 col-form-label">Documento</label>
                                 <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName2" placeholder="Name" value="{{ Auth::user()->documento }}">
+                                <input type="text" class="form-control" placeholder="Name" name="documento" value="{{ Auth::user()->documento }}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputName2" class="col-sm-2 col-form-label">Contraseña</label>
                                 <div class="col-sm-10">
-                                <input type="hidden" class="form-control" id="inputName2" placeholder="Name" value="{{ Auth::user()->password }}">
-                                <input type="text" class="form-control" id="inputName2" placeholder="Name" value="">
+                                <input type="hidden" class="form-control" placeholder="Name" name="password" value="{{ Auth::user()->password }}">
+                                <input type="text" class="form-control" placeholder="Name" name="passwordN" value="" name="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-10">
                                 <div class="checkbox">
                                     <label>
-                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
                                     </label>
                                 </div>
                                 </div>
