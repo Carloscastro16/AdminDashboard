@@ -26,6 +26,8 @@
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <!-- Scripts -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   @vite(['resources/js/app.js'])
 </head>
 <body class="hold-transition sidebar-mini layout-fixed ">
@@ -654,15 +656,21 @@
 <!-- /.content-wrapper -->
 
 <!-- /.control-sidebar -->
+{{-- Datatables Responsibe Scripts --}}
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.bootstrap4.min.js"></script>
 
             <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
+{{-- <script>
   $.widget.bridge('uibutton', $.ui.button)
-</script>
+</script> --}}
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -689,5 +697,39 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript">
+    $(".dtUsers").DataTable({
+        "language": {
+            "sSearch": "Buscar",
+            "sEmptyTable": "No hay datos",
+            "sZeroRecords": "No se encontraron resultados",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total _TOTAL_",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+            "sInfoFiltered": "(Filtrando un total de _MAX_ registros)",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Ultimo",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "sLoadingRecords": "Cargando..."
+            "sLengthMenu": "Mostrar _MENU_ registros"
+        }
+    })
+</script>
+@if(session('UsuarioCreado')=='OK')
+    <script type="text/javascript">
+        Swal.fire(
+            'El usuario ha sido creado',
+            '',
+            'Sucess'
+        )
+    </script>
+@endif
 </body>
 </html>

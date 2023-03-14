@@ -126,7 +126,7 @@ class UsuariosController extends Controller
             'foto' => ''
         ]);
         //redireccionamos a la vista usuarios, al llamar a la ruta Usuarios
-return redirect('Usuarios') -> with('UsuarioCreado','OK');
+    return redirect('Usuarios') -> with('UsuarioCreado','OK');
     }
 
     /**

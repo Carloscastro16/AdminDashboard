@@ -125,12 +125,20 @@
         @else
             <li class="dropdown user user-menu">
                 <a href="#" class="nav-link" data-toggle="dropdown">
-                    <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                    @if(auth()->user()->foto == "")
+                        <img src="{{ url('storage/deault.png') }}" class="user-image">
+                    @else
+                        <img src="{{ url('storage/' .auth()->user()->foto ) }}" class="user-image">
+                    @endif
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header ">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        @if(auth()->user()->foto == "")
+                            <img src="{{ url('storage/deault.png') }}" class="user-image">
+                        @else
+                            <img src="{{ url('storage/' .auth()->user()->foto ) }}" class="user-image">
+                        @endif                        
                         <p>
                             {{ Auth::user()->name }}
                             <small>{{ Auth::user()->rol }}</small>
