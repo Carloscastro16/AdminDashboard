@@ -128,6 +128,15 @@ class UsuariosController extends Controller
         //redireccionamos a la vista usuarios, al llamar a la ruta Usuarios
     return redirect('Usuarios') -> with('UsuarioCreado','OK');
     }
+    public function destroy($id){
+        $usuario = Usuarios::find($id);
+        $exp = explode('/', $usuario->foto);
+        if(Storage::delete('public/'.$usuario->foto)){
+            Storage::deleteDirectory('public/'.$exp[0].'/'.$exp[1]);
+        }
+        Usuarios::destroy($id);
+        return redirect('Usuarios');
+    }
 
     /**
      * Display the specified resource.
@@ -169,8 +178,4 @@ class UsuariosController extends Controller
      * @param  \App\Models\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuarios $usuarios)
-    {
-        //
-    }
 }

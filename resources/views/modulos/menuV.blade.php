@@ -46,9 +46,15 @@
           </li>
           <li class="nav-header">Funciones</li>
           <li class="nav-item">
-            <a href="{{ route('index') }}" class="nav-link">
+            <a href="{{ route('/Usuarios')}}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p>Gestor de Usuarios</p>
+              <p>Ventas de Libros</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('/Usuarios')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Registros de libros</p>
             </a>
           </li>
         </ul>
