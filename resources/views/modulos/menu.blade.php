@@ -51,6 +51,12 @@
               <p>Gestor de Usuarios</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('clientes') }}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Gestor de clientes</p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

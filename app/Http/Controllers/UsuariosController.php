@@ -105,7 +105,7 @@ class UsuariosController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        return redirect()->back()->with('success', 'User updated successfully');
+        return redirect()->back()->with('UsuarioActualizado', 'OK');
     }
 
     /**

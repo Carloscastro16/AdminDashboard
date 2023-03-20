@@ -93,6 +93,12 @@
 <script src="http://localhost/AdminDashboard/public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="http://localhost/AdminDashboard/public/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 
+<script src="http://localhost/AdminDashboard/public/plugins/inputmask/inputmask.es6.js"></script>
+<script src="http://localhost/AdminDashboard/public/plugins/inputmask/inputmask.min.js"></script>
+<script src="http://localhost/AdminDashboard/public/plugins/inputmask/jquery.inputmask.js"></script>
+<script src="http://localhost/AdminDashboard/public/plugins/inputmask/jquery.inputmask.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script type="text/javascript">
     $(".dtUsers").DataTable({
         "language": {
@@ -134,6 +140,27 @@
             }
         })
     })
+    $('[data-mask]').inputmask();
+</script>
+<script type="text/javascript">
+    $('.table').on('click', '.EliminarCliente', function(){
+        var Uid = $(this).attr('Uid');
+        var Usuario = $(this).attr('Usuario');
+
+        Swal.fire({
+            title: "¿Seguro que desea eliminar al usuario "+Usuario+" "+Uid+" ?",
+            icon: 'warming',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            confirmButtonColor: '#3085d6',
+        }).then((result) => {
+            if (result.isConfirmed){
+                window.location = "Eliminar-Cliente/"+Uid;
+            }
+        })
+    })
 </script>
 
 {{-- @if(session('EliminarUsuario')=='OK')
@@ -154,9 +181,25 @@
         'success'
         );
     </script>
+@elseif(session('ClienteCreado')=='OK')
+    <script type="text/javascript">
+        Swal.fire(
+        'El Cliente ha sido creado',
+        '',
+        'success'
+        );
+    </script>
+@elseif(session('UsuarioActualizado')=='OK')
+<script type="text/javascript">
+    Swal.fire(
+    'El Usuario ha sido modificado',
+    '',
+    'success'
+    );
+</script>
 @endif
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>
 

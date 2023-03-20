@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,20 +25,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('Inicio', [InicioController::class, 'index']);
-Route::get('/MiPerfil', [App\Http\Controllers\UsuariosController::class, 'MiPerfil'])->name('MiPerfil');
-Route::put('/MiPerfil', [App\Http\Controllers\UsuariosController::class, 'MiPerfilUpdate'])->name('MiPerfilUpdate');
+Route::get('/MiPerfil', [UsuariosController::class, 'MiPerfil'])->name('MiPerfil');
+Route::put('/MiPerfil', [UsuariosController::class, 'MiPerfilUpdate'])->name('MiPerfilUpdate');
 
-Route::get('/Usuarios', [App\Http\Controllers\UsuariosController::class, 'index'])->name('index');
-Route::post('/Usuarios', [App\Http\Controllers\UsuariosController::class, 'store'])->name('store');
+Route::get('/Usuarios', [UsuariosController::class, 'index'])->name('index');
+Route::post('/Usuarios', [UsuariosController::class, 'store'])->name('store');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('Eliminar-Usuario/{id}', [App\Http\Controllers\UsuariosController::class, 'destroy']);
-Route::match(['put', 'post'],'/Usuarios/{id}/actualizar', [App\Http\Controllers\UsuariosController::class, 'edit'])->name('usuarios.actualizar');
+Route::get('Eliminar-Usuario/{id}', [UsuariosController::class, 'destroy']);
+Route::match(['put', 'post'],'/Usuarios/{id}/actualizar', [UsuariosController::class, 'edit'])->name('usuarios.actualizar');
 
-Route::get('Clientes', [ClientesController::class, 'index']);
+Route::get('Clientes', [ClientesController::class, 'index'])->name('clientes');
+Route::post('Clientes', [ClientesController::class, 'store'])->name('store');
+Route::match(['put', 'post'],'/Clientes/{id}/actualizar', [ClientesController::class, 'edit'])->name('clientes.actualizar');
+Route::get('Eliminar-Cliente/{id}', [ClientesController::class, 'destroy']);

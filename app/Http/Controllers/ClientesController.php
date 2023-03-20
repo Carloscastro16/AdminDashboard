@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Clientes;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 class ClientesController extends Controller
 {
     /**
@@ -14,8 +18,10 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Clientes::all();
+        return view('modulos.Clientes')-> with ('clientes',$clientes);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +41,18 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos = request();
+        //crear el registro en la tabla users en la bd
+        Clientes::create([
+            'nombre' => $datos['name'],
+            'email' => $datos['email'],
+            'documento' => $datos['documento'],
+            'fechaNac' => $datos['fechaNac'],
+            'telefono' => $datos['telefono'],
+            'password' => Hash::make($datos['password']),
+        ]);
+        //redireccionamos a la vista usuarios, al llamar a la ruta Usuarios
+    return redirect('Clientes') -> with('UsuarioCreado','OK');
     }
 
     /**
@@ -55,9 +72,18 @@ class ClientesController extends Controller
      * @param  \App\Models\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clientes $clientes)
+    public function edit(Request $request, $id)
     {
-        //
+        $user = Clientes::find($id);
+
+        $user->nombre = $request->input('name');
+        $user->email = $request->input('email');
+        $user->documento = $request->input('documento');
+        $user->fechaNac = $request->input('fechaNac');
+        $user->telefono = $request->input('telefono');
+        $user->save();
+
+        return redirect()->back()->with('UsuarioActualizado', 'OK');
     }
 
     /**
@@ -78,8 +104,9 @@ class ClientesController extends Controller
      * @param  \App\Models\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clientes $clientes)
-    {
-        //
+    public function destroy($id){
+        $clientes = Clientes::find($id);
+        Clientes::destroy($id);
+        return redirect('Clientes');
     }
 }
