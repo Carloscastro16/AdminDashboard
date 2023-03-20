@@ -36,3 +36,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('Eliminar-Usuario/{id}', [App\Http\Controllers\UsuariosController::class, 'destroy']);
+Route::get('Editar-Usuario/{id}', [App\Http\Controllers\UsuariosController::class, 'edit']);

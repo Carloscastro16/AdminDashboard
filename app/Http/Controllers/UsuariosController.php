@@ -96,9 +96,14 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function edit(Usuarios $id)
     {
-        //
+        if(auth()->user()->rol != 'Administrador'){
+            return redirect('Inicio');
+        }
+        $usuarios = Usuarios::all();
+        $usuario = Usuarios::find($id->id);
+        return view('modulos.Usuarios', compact('usuarios', 'usuario'));
     }
 
     /**
@@ -138,6 +143,9 @@ class UsuariosController extends Controller
         return redirect('Usuarios');
     }
 
+
+
+
     /**
      * Display the specified resource.
      *
@@ -155,11 +163,7 @@ class UsuariosController extends Controller
      * @param  \App\Models\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuarios $usuarios)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
