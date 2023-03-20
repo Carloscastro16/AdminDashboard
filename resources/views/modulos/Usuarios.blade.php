@@ -39,13 +39,50 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->rol }}</td>
                                     <td>
-                                        <a href="{{ url('Editar-Usuario/'.$user->id) }}">
-                                            <button class="btn btn-success"><i class="fas fa-pencil-alt" 
-                                            data-toggle="modal" data-target="#EditarUsuario"></i></button>
-                                        </a>
+                                        <button class="btn btn-success"><i class="fas fa-pencil-alt" 
+                                            data-toggle="modal" data-target="#EditarUsuario{{ $user->id }}"></i></button>
                                         <button class="btn btn-danger EliminarUsuario" Uid="{{$user->id}}" Usuario="{{ $user->name }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
+                                        <div class="modal fade" id="EditarUsuario{{ $user->id }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form method="post" action="{{ route('usuarios.actualizar', ['id' => $user->id]) }}">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="box-body">
+                                                                <div class="form-group">
+                                                                    <h2>Tipo de usuario</h2>
+                                                                    <select class="form-control input-lg" name="rol">
+                                                                        <option value="{{$user -> rol}}">{{$user -> rol}}</option>
+                                                                        <option value="Administrador">Administrador</option>
+                                                                        <option value="Vendedor">Vendedor</option>
+                                                                    </select>
+                                                                </div>
+                                                                <input type="hidden" name="user_id" value="{{$user -> id}}">
+                                                                <div class="form-group">
+                                                                    <h2>Nombre</h2>
+                                                                    <input type="text" class="form-control input-lg" name="name" id="name" value="{{$user -> name}}" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <h2>Email</h2>
+                                                                    <input type="email" class="form-control input-lg" name="email" id="email" value="{{$user -> email}}" required>
+                                                                </div>
+                                                                {{-- <div class="form-group">
+                                                                    <h2>Contraseña</h2>
+                                                                    <input type="password" class="form-control input-lg" name="password" required>
+                                                                </div> --}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">Modificar</button>
+                                                            <button type="button" class="btn btn-danger" 
+                                                            data-dismiss="modal">Cancelar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -94,48 +131,5 @@
             </div>
         </div>
     </div>
-    <?php
-        $exp = explode('/', $_SERVER["REQUEST_URI"]);
-    ?>
-    @if($exp[3] == 'Editar-Usuario')
-        <div class="modal fade" id="EditarUsuario">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form method="post">
-                        @csrf
-                        @method('put')
-                        <div class="modal-body">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <h2>Tipo de usuario</h2>
-                                    <select class="form-control input-lg" name="rol">
-                                        <option value="{{$user -> rol}}">{{$user -> rol}}</option>
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Vendedor">Vendedor</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <h2>Nombre</h2>
-                                    <input type="text" class="form-control input-lg" name="name" value="{{$user -> name}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <h2>Email</h2>
-                                    <input type="email" class="form-control input-lg" name="email" value="{{$user -> email}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <h2>Contraseña</h2>
-                                    <input type="password" class="form-control input-lg" name="password" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Modificar</button>
-                            <button type="button" class="btn btn-danger" 
-                            data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endif
+    
 @endsection

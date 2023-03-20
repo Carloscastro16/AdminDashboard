@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ClientesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +38,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('Eliminar-Usuario/{id}', [App\Http\Controllers\UsuariosController::class, 'destroy']);
-Route::get('Editar-Usuario/{id}', [App\Http\Controllers\UsuariosController::class, 'edit']);
+Route::match(['put', 'post'],'/Usuarios/{id}/actualizar', [App\Http\Controllers\UsuariosController::class, 'edit'])->name('usuarios.actualizar');
+
+Route::get('Clientes', [ClientesController::class, 'index']);

@@ -96,14 +96,16 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuarios $id)
+    public function edit(Request $request, $id)
     {
-        if(auth()->user()->rol != 'Administrador'){
-            return redirect('Inicio');
-        }
-        $usuarios = Usuarios::all();
-        $usuario = Usuarios::find($id->id);
-        return view('modulos.Usuarios', compact('usuarios', 'usuario'));
+        $user = Usuarios::find($id);
+
+        $user->rol = $request->input('rol');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        return redirect()->back()->with('success', 'User updated successfully');
     }
 
     /**
